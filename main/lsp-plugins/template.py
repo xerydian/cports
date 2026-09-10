@@ -1,6 +1,6 @@
 pkgname = "lsp-plugins"
 pkgver = "1.2.35"
-pkgrel = 0
+pkgrel = 1
 build_style = "makefile"
 make_use_env = True
 hostmakedepends = [
@@ -42,12 +42,6 @@ def configure(self):
 @subpackage("lsp-plugins-devel")
 def _(self):
     return self.default_devel()
-
-
-@subpackage("lsp-plugins-xdg")
-def _(self):
-    self.subdesc = "icons and .desktop file"
-    return ["usr/share/applications", "usr/share/icons"]
 
 
 @subpackage("lsp-plugins-clap")
