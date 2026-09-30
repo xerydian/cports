@@ -1,0 +1,43 @@
+diff --git a/src/prefsdialog.cpp b/src/prefsdialog.cpp
+index 2460154..4312bdf 100644
+--- a/src/prefsdialog.cpp
++++ b/src/prefsdialog.cpp
+@@ -97,9 +97,7 @@ create_field_page (GtkBuilder  *builder,
+             continue;
+           }
+         case COL_SECURITYCONTEXT:
+-          if (!gsm_selinux_is_enabled ()) {
+-            continue;
+-          }
++          continue;
+         case COL_UNIT:
+         case COL_SESSION:
+         case COL_SEAT:
+diff --git a/src/procinfo.cpp b/src/procinfo.cpp
+index 15e9c19..707252d 100644
+--- a/src/procinfo.cpp
++++ b/src/procinfo.cpp
+@@ -132,7 +132,7 @@ ProcInfo::ProcInfo(pid_t pid)
+   info->start_time = proctime.start_time;
+ 
+   gsm_proc_info_load_cgroups (info);
+-  gsm_proc_info_load_selinux (info);
++  // gsm_proc_info_load_selinux (info);
+   gsm_proc_info_load_systemd (info);
+ }
+ 
+diff --git a/src/proctable.cpp b/src/proctable.cpp
+index 8f99114..551b1ba 100644
+--- a/src/proctable.cpp
++++ b/src/proctable.cpp
+@@ -676,10 +676,6 @@ proctable_new (GsmApplication * const app)
+     gsm_tree_view_add_excluded_column (proctree, COL_OWNER);
+   }
+ 
+-  if (!gsm_selinux_is_enabled ()) {
+-    gsm_tree_view_add_excluded_column (proctree, COL_SECURITYCONTEXT);
+-  }
+-
+   gsm_tree_view_load_state (proctree);
+ 
+   GtkIconTheme*theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
